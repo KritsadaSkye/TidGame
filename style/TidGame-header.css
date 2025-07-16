@@ -7,7 +7,7 @@ header {
     position: relative;
     align-items: center;
     justify-content: space-between;
-    top: 0;
+    margin-bottom: 0px;
 
     height: 100px;
 }
@@ -28,12 +28,27 @@ header {
     flex: 1;
 }
 
+.search-logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-logo {
+    height: 25px;
+
+
+    position: absolute;
+    padding-left: 20px;
+}
+
 .search-bar {
     width: 650px;
-    height: 50px;
+    height: 40px;
     border: none;
     border-radius: 35px;
+    padding-left: 55px;
     font-size: 16px;
+    box-sizing: border-box;
 }
 
 .header-right-section {
@@ -41,9 +56,11 @@ header {
     gap: 15px;
 
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-shrink: 0;
     position: relative;
+    box-sizing: border-box;
+    padding-left: 60px;
 }
 
 .user-logo,
@@ -68,4 +85,21 @@ header {
     padding: 2px 4px;
     border-radius: 10px;
     color: white;
+}
+
+.nav-list {
+    color: white;
+
+    display: flex;
+    list-style-type: none;
+    gap: 90px;
+    justify-content: center;
+    margin-top: 0px;
+    align-items: center;
+}
+
+nav {
+    background-image: linear-gradient(to right, #55358d 0%, #3E56CF 50%, #7081ee 90%);
+
+    height: 30px;
 }
