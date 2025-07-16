@@ -1,21 +1,71 @@
 header {
-    background-color: #98886E;
-    display: flex;
-    position: fixed;
+    background-image: linear-gradient(to right, #55358d 0%, #3E56CF 50%, #7081ee 90%);
 
+    padding: 0px 200px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 135px;
+
+    height: 100px;
 }
 
-footer {
-    background-color: #b3b3b3;
+.header-left-section {
+    width: 200px;
     display: flex;
-    position: fixed;
+    flex-shrink: 0;
+}
 
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 135px;
+.TidGame-logo {
+    margin-left: 20px;
+}
+
+.header-middle-section {
+    justify-content: center;
+    display: flex;
+    flex: 1;
+}
+
+.search-bar {
+    width: 650px;
+    height: 50px;
+    border: none;
+    border-radius: 35px;
+    font-size: 16px;
+}
+
+.header-right-section {
+    width: 200px;
+    gap: 15px;
+
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.user-logo,
+.cart-logo,
+.notification-logo {
+    width: 32px;
+}
+
+.notification-container {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-count {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    font-size: 10px;
+    font-family: Roboto, Arial;
+    background-color: rgb(218, 22, 22);
+    padding: 2px 4px;
+    border-radius: 10px;
+    color: white;
 }
