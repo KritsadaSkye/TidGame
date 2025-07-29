@@ -1,0 +1,131 @@
+.main-container {
+    margin-top: 80px;
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.cart-container {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    width: 880px;
+    padding-bottom: 35px;
+}
+
+.cart-header {
+    margin-left: 30px;
+}
+
+.cart-flex {
+    display: flex;
+    column-gap: 55px;
+    padding: 0px 50px;
+    align-items: flex-start;
+}
+
+.products-flex {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+.products-conatiner {
+    border: solid 1px black;
+    border-radius: 10px;
+    width: 470px;
+}
+
+.cross-sign {
+    display: flex;
+    padding-top: 5px;
+    padding-left: 10px;
+    height: 25px;
+    align-items: end;
+}
+
+.cross-sign img {
+    height: 22px;
+}
+
+.product-item {
+    display: flex;
+    align-items: start;
+    column-gap: 20px;
+
+    padding-left: 30px;
+    padding-right: 10px;
+    padding-bottom: 25px;
+
+}
+
+.product-image {
+    border: none;
+    border-radius: 8px;
+    background-color: burlywood;
+    overflow: hidden;
+    width: 200px;
+    height: 130px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.type-game {
+    margin-top: 7px;
+}
+
+.order-summary {
+    border: solid 1px black;
+    border-radius: 10px;
+    width: 255px;
+
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.summary-line {
+    border: none;
+    border-top: 1.5px solid #222;
+    margin: 8px 0;
+}
+
+.order-details {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+}
+
+.name-price-product {
+    display: flex;
+    justify-content: space-between;
+}
+
+.name-price-product * {
+    margin: 0;
+}
+
+.all-price {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.button-flex {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+.button-flex button {
+    background-color: #FF0000;
+    color: white;
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+}
