@@ -92,6 +92,45 @@ header {
     color: white;
 }
 
+.login-dialog-container {
+    background-color: rgb(255, 255, 255);
+    width: 120px;
+    height: 140px;
+
+    border-radius: 10px;
+    position: absolute;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    top: 50px;
+    right: 70px;
+}
+
+.login-dialog-container a {
+    font-size: 18px;
+
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    ;
+}
+
+.login-text {
+    border-bottom: solid 1px rgb(206, 206, 206);
+}
+
+.login-dialog-container a:hover {
+    background-color: #ddddddbd;
+    transform: scale(1.1);
+    color: #6d6d6d;
+}
+
 .nav-list {
     color: white;
 
@@ -111,7 +150,7 @@ nav {
 
 .list-nav-game {
     background-color: #ffffff;
-    color: #838383;
+    color: #1d1d1d;
     font-weight: 700;
 
     padding: 5px 10px;
@@ -124,4 +163,5 @@ nav {
 .list-nav-game:hover {
     background-color: rgba(252, 195, 195, 0.7);
     transform: scale(1.1);
+    color: #575757;
 }
