@@ -11,7 +11,7 @@ export async function POST(req: Request) {
             data: {
                 title,
                 content,
-            },
+            }
         })
         return Response.json(newPost)
     } catch (error) {
