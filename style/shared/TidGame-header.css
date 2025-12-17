@@ -5,6 +5,7 @@
 
 header {
     background-image: linear-gradient(to right, #55358d 0%, #3E56CF 50%, #7081ee 90%);
+    position: sticky;
 
     padding: 0px 200px;
     display: flex;
@@ -161,7 +162,7 @@ nav {
 }
 
 .list-nav-game:hover {
-    background-color: rgba(252, 195, 195, 0.7);
+    background-color: #fcc3c3b3;
     transform: scale(1.1);
     color: #575757;
 }
