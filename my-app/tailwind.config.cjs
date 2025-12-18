@@ -12,6 +12,7 @@ module.exports = {
                     light: '#3ABFF8',
                     dark: '#1d1d1d',
                     gray: '#838383',
+                    redbutton: '#FF0000',
                 },
             },
         },

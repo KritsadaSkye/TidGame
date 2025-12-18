@@ -42,7 +42,7 @@ export function Header() {
                     <Image src="/image/user-logo.png" alt="User" width={32} height={32} />
                 </Link>
 
-                <Link href="/">
+                <Link href="/checkout">
                     <Image src="/image/cart-logo.png" alt="Cart" width={32} height={32} />
                 </Link>
 
