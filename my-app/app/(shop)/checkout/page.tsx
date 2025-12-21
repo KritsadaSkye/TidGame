@@ -17,11 +17,11 @@ export default function CheckoutPage() {
                             <div className="products-flex flex flex-col gap-y-[30px]">
                                 <div className="products-conatiner border-[1px] border-gray-300 rounded-[10px] w-[472px]">
                                     <div className="cross-sign flex pt-[5px] pl-[10px] h-[25px] align-items-end cursor-pointer">
-                                        <Image src="/image/cross-logo.png" alt="CrossLogo" width={22} height={26} />
+                                        <Image src="/images/cross-logo.png" alt="CrossLogo" width={22} height={26} />
                                     </div>
                                     <div className="product-item flex align-items-start gap-x-[20px] pl-[30px] pr-[10px] pb-[25px]">
                                         <div className="product-image border-none rounded-[8px] bg-burlywood w-[200px] h-[130px] overflow-hidden flex justify-center">
-                                            <Image src="/image/products/pubg-image.png" alt="Pubg Image" width={250} height={130} className="object-cover" />
+                                            <Image src="/images/products/pubg-image.png" alt="Pubg Image" width={250} height={130} className="object-cover" />
                                         </div>
                                         <div className="product-details">
                                             <p className="type-game mt-[7px]">ประเภท : PC game</p>
@@ -47,7 +47,7 @@ export default function CheckoutPage() {
                                     <p>700Bath</p>
                                 </div>
                                 <div className="button-flex flex justify-center pt-[10px] pb-[40px]">
-                                    <button className="checkout-button bg-red-500 text-white border-none rounded-[4px] w-[150px] h-[30px] cursor-pointer"><u>ยืนยันคำสั่งชื้อ</u></button>
+                                    <button className="checkout-button bg-[#FF0000] text-white border-none rounded-[4px] w-[150px] h-[30px] cursor-pointer"><u>ยืนยันคำสั่งชื้อ</u></button>
                                 </div>
                             </div>
                         </div>

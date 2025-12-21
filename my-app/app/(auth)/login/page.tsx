@@ -1,0 +1,59 @@
+"use client"
+
+import { Header } from '@/app/components/Header/Header'
+
+export default function LoginPage() {
+    return (
+        <>
+            <Header />
+            <main>
+                <div className="login-flex flex justify-center mt-20">
+                    <div className="login-container block text-center w-[650px] h-[400px] rounded-2xl shadow-[0_0_30px_10px_rgba(0,0,0,0.3)]">
+                        <form className="login-form flex flex-col mt-8">
+                            <h1 className="text-2xl font-semibold mt-1">
+                                เข้าสู่ระบบ
+                            </h1>
+
+                            <div className="input-container mt-14 flex flex-col items-center gap-4">
+                                <input
+                                    type="text"
+                                    placeholder="อีเมล"
+                                    required
+                                    className="w-[550px] h-[45px] border border-gray-300 rounded-md pl-5 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                />
+
+                                <input
+                                    type="password"
+                                    placeholder="รหัสผ่าน"
+                                    required
+                                    className="w-[550px] h-[45px] border border-gray-300 rounded-md pl-5 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                />
+                            </div>
+
+                            <div className="forgot-password-container flex justify-start mt-4 ml-10">
+                                <a
+                                    href="#"
+                                    className="text-[#697cf7] text-base hover:underline pl-[15px]"
+                                >
+                                    ลืมรหัสผ่าน?
+                                </a>
+                            </div>
+
+                            <div className="mt-8">
+                                <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl font-medium rounded-full text-sm px-4 py-2.5 text-center leading-5 cursor-pointer">เข้าสู่ระบบ</button>
+                                <div className="register-container flex justify-center items-end mt-4">
+                                    <p className="text-sm">ยังไม่มีบัญชีผู้ใช้?</p>
+                                    <a
+                                        href="#"
+                                        className="text-base text-[#697cf7] text-base hover:underline pl-[15px]"
+                                    >
+                                        สมัครสมาชิกใหม่
+                                    </a></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </>
+    );
+}

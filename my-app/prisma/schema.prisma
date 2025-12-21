@@ -21,9 +21,90 @@ model Post {
 }
 
 model Product {
-  id   Int    @id @default(autoincrement())
-  img  String
-  type String
-  name String
-  sold Int?
+  id      Int      @id @default(autoincrement())
+  img     String
+  type    String
+  name    String
+  sold    Int?
+  idGames IdGame[]
+}
+
+model IdGame {
+  id          Int           @id @default(autoincrement())
+  username    String
+  password    String
+  price       Int
+  description String?
+  status      AccountStatus @default(AVAILABLE)
+
+  createdAt DateTime @default(now())
+  productId Int
+
+  product Product @relation(fields: [productId], references: [id])
+
+  cartItems CartItem[]
+  orderItem OrderItem?
+}
+
+enum AccountStatus {
+  AVAILABLE
+  SOLD
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  cart   Cart?
+  orders Order[]
+}
+
+model Cart {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  createdAt DateTime @default(now())
+
+  user  User       @relation(fields: [userId], references: [id])
+  items CartItem[]
+}
+
+model CartItem {
+  id            Int @id @default(autoincrement())
+  cartId        Int
+  gameAccountId Int
+
+  cart        Cart   @relation(fields: [cartId], references: [id])
+  gameAccount IdGame @relation(fields: [gameAccountId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([cartId, gameAccountId])
+}
+
+model Order {
+  id        Int         @id @default(autoincrement())
+  userId    Int
+  status    OrderStatus @default(PAID)
+  createdAt DateTime    @default(now())
+
+  user  User        @relation(fields: [userId], references: [id])
+  items OrderItem[]
+}
+
+enum OrderStatus {
+  PAID
+  CANCELLED
+}
+
+model OrderItem {
+  id            Int @id @default(autoincrement())
+  orderId       Int
+  gameAccountId Int @unique
+
+  order       Order  @relation(fields: [orderId], references: [id])
+  gameAccount IdGame @relation(fields: [gameAccountId], references: [id])
+
+  createdAt DateTime @default(now())
 }
