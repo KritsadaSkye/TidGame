@@ -1,7 +1,6 @@
 import prisma from '@/lib/db';
 
-export async function GET(request: Request,
-    { params }: { params: { id: string } }) {
+export async function GET({ params }: { params: { id: string } }) {
 
     const { id } = await params;
 
@@ -21,8 +20,7 @@ export async function GET(request: Request,
     }
 }
 
-export async function DELETE(request: Request,
-    { params }: { params: { id: string } }
+export async function DELETE({ params }: { params: { id: string } }
 ) {
     const { id } = await params;
 

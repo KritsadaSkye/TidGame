@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { HeaderRight } from './HeaderRight'
 
 export function Header() {
     return (
@@ -36,24 +37,8 @@ export function Header() {
                     />
                 </div>
             </div>
+            <HeaderRight />
 
-            <div className="w-[200px] flex gap-[15px] justify-start items-center pl-[60px]">
-                <Link href="/login">
-                    <Image src="/images/user-logo.png" alt="User" width={32} height={32} />
-                </Link>
-
-                <Link href="/checkout">
-                    <Image src="/images/cart-logo.png" alt="Cart" width={32} height={32} />
-                </Link>
-
-                <div className="relative">
-                    <Image src="/images/notification-logo.png" alt="Notification" width={32} height={32} />
-                    <div className="absolute -top-1 -right-1 text-xs bg-red-500 px-2 py-0.5 rounded-full text-white">
-                        2
-                    </div>
-                </div>
-            </div>
         </header>
-
     );
 }

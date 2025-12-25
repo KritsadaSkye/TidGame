@@ -38,7 +38,7 @@ export async function POST(request: Request) {
             maxAge: 60 * 60 * 24,
         });
 
-        return Response.json({ message: "login success", token }, { status: 200 });
+        return Response.json({ message: "login success" }, { status: 200 });
     } catch (error) {
         return Response.json({ error: "Login failed" }, { status: 401 });
     }
