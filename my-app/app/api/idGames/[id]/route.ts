@@ -15,8 +15,8 @@ export async function GET(request: NextRequest, context: { params: { id: string 
     }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
-    const { id } = await params;
+export async function DELETE(request: NextRequest, context: { params: { id: string } }) {
+    const { id } = context.params;
     try {
         const deletedIdGames = await prisma.idGame.delete({
             where: { id: Number(id) }
