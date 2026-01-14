@@ -1,15 +1,32 @@
-FROM node:20-alpine AS builder
+FROM node:20-alpine AS runner
+
 WORKDIR /app
+
 COPY package*.json ./
-RUN npm ci --only=production
+
+RUN npm ci
+
+# Copy source code
 COPY . .
+
+RUN npx prisma generate
+
 RUN npm run build
 
-FROM node:20-alpine AS runner
+FROM node:18-alpine
+
 WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --only=production
+
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/node_modules ./
-COPY --from=builder /app/package.json ./
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+
+ENV NODE_ENV=production
+ENV PORT=3000
+
 EXPOSE 3000
+
 CMD ["npm", "start"]
