@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import { item } from '@/app/types/idGame';
+import { Item } from '@/app/types/idGame';
 
-export function CartItem({ item }: { item: item }) {
+export function CartItem({ item }: { item: Item }) {
     console.log(item);
     return (
         <>

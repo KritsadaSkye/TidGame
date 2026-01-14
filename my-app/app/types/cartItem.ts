@@ -1,9 +1,9 @@
-import { item } from "./idGame";
+import { Item } from "./idGame";
 
-export interface cartItem {
+export interface CartItem {
     id: number;
     cartId: number;
     gameAccountId: number;
-    gameAccount: item;
+    gameAccount: Item;
     createdAt: Date;
 }

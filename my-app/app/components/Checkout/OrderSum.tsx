@@ -1,7 +1,7 @@
 import { OrderSumItem } from "./OrderSumItem";
-import { cartItem } from '@/app/types/cartItem';
+import { CartItem } from '@/app/types/cartItem';
 
-export function OrderSum({ cartItems }: { cartItems: cartItem[] }) {
+export function OrderSum({ cartItems }: { cartItems: CartItem[] }) {
     return (
         <>
             <div className="order-summary border-[1px] border-black rounded-[10px] w-[255px] px-[18px] py-[15px]">
@@ -10,7 +10,7 @@ export function OrderSum({ cartItems }: { cartItems: cartItem[] }) {
                 <hr className="summary-line border-t-[1.5px] border-black mt-[15px] my-[10px] mx-[0px]" />
                 <div className="order-details flex flex-col gap-y-[20px] pt-[13px] pb-[13px]">
                     <>
-                        {cartItems.map((item: cartItem) => {
+                        {cartItems.map((item: CartItem) => {
                             console.log(item);
                             return (<OrderSumItem key={item.gameAccount.id} item={item.gameAccount} />);
                         })}

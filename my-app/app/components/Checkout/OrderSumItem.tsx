@@ -1,6 +1,6 @@
-import { item } from "@/app/types/idGame";
+import { Item } from "@/app/types/idGame";
 
-export function OrderSumItem({ item }: { item: item }) {
+export function OrderSumItem({ item }: { item: Item }) {
     return (
         <>
             <div className="name-price-product flex justify-between">
