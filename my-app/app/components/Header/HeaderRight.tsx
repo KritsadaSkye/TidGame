@@ -9,9 +9,9 @@ export function HeaderRight() {
         <>
             <div className="w-[200px] flex gap-[15px] justify-start items-center pl-[60px]">
 
-                <Image onClick={() => pushLoginPage("/login")} src="/images/user-logo.png" alt="User" className="cursor-pointer" width={32} height={32} />
+                <Image onClick={() => pushLoginPage("/login")} src="/images/user-logo1.png" alt="User" className="cursor-pointer" width={35} height={35} />
 
-                <Image onClick={() => pushLoginPage("/checkout")} src="/images/cart-logo.png" alt="Cart" className="cursor-pointer" width={32} height={32} />
+                <Image onClick={() => pushLoginPage("/checkout")} src="/images/cart-logo1.png" alt="Cart" className="cursor-pointer" width={35} height={35} />
 
                 <div className="relative">
                     <Image src="/images/notification-logo.png" alt="Notification" width={32} height={32} />

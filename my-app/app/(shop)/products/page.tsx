@@ -30,7 +30,7 @@ export default function ProductsPage() {
         <Header />
         <Nav />
       </div>
-      <main className="grid mt-16 grid-cols-4 justify-items-center gap-x-10 gap-y-14 pl-40 pr-40 pb-1000">
+      <main className="grid mt-16 grid-cols-3 w-full justify-center gap-x-10 gap-y-14 pb-1000">
         {products.map((product: Product) => {
           return (<Products key={product.id} product={product} />)
         })

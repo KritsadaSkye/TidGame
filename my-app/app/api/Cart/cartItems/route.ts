@@ -4,18 +4,26 @@ import { getToken } from '../../auth/auth';
 export async function GET() {
     try {
         const userId = await getToken();
+
         if (!userId) {
             return Response.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        return Response.json(await prisma.cartItem.findMany({
+        const items = await prisma.cartItem.findMany({
             where: { cartId: userId },
             include: {
-                gameAccount: true
+                gameAccount: true,
             }
-        }))
-    } catch (error) {
+        });
 
+        const totalPrice = items.reduce((sum, item) => sum + item.gameAccount.price, 0);
+
+        return Response.json({ items, totalPrice });
+    } catch (error) {
+        return Response.json(
+            { error: "Failed to fetch cart items" },
+            { status: 500 }
+        );
     }
 }
 

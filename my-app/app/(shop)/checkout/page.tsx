@@ -1,20 +1,22 @@
 "use client"
 
 import axios from 'axios';
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from '@/app/components/Header/Header'
 import { OrderSum } from '@/app/components/Checkout/OrderSum';
-import { CartItem } from '@/app/components/Checkout/CartItem';
-import { cartItem } from '@/app/types/cartItem';
+import { CartDetailItem } from '@/app/components/Checkout/CartDetailItem';
+import { CartItem } from '@/app/types/cartItem';
 
 export default function CheckoutPage() {
 
     const [cartItems, setCartItems] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const fetchCartItems = async () => {
         try {
             const response = await axios.get('/api/Cart/cartItems');
-            setCartItems(response.data);
+            setCartItems(response.data.items);
+            setTotalPrice(response.data.totalPrice);
         } catch (error) {
             console.error('Error fetching cart items:', error);
         }
@@ -22,7 +24,9 @@ export default function CheckoutPage() {
 
     useEffect(() => {
         fetchCartItems();
+        console.log(cartItems);
     }, []);
+
 
 
     return (
@@ -35,13 +39,13 @@ export default function CheckoutPage() {
                             <h1 className="text-3xl font-bold pb-[30px]">รายการสินค้า(2):</h1>
                         </div>
                         <div className="cart-flex flex gap-x-[55px] px-[50px] items-start">
-                            <>
-                                {cartItems.map((item: cartItem) => {
+                            <div className="cart-items flex flex-col gap-y-[20px]">
+                                {cartItems.map((item: CartItem) => {
                                     console.log(item);
-                                    return (<CartItem key={item.gameAccount.id} item={item.gameAccount} />);
+                                    return (<CartDetailItem key={item.gameAccount.id} item={item.gameAccount} />);
                                 })}
-                            </>
-                            <OrderSum cartItems={cartItems} />
+                            </div>
+                            <OrderSum cartItems={cartItems} totalPrice={totalPrice} />
                         </div>
                     </div>
                 </div>
