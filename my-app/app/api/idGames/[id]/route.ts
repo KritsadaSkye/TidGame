@@ -1,7 +1,8 @@
 import prisma from '@/lib/db';
+import { NextRequest } from 'next/dist/server/web/spec-extension/request';
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
-    const { id } = await params;
+export async function GET(request: NextRequest, context: { params: { id: string } }) {
+    const { id } = await context.params;;
     try {
         const productId = Number(id);
         const getIdGame = await prisma.idGame.findMany({

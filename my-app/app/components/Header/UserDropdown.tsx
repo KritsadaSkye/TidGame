@@ -10,7 +10,7 @@ type Props = {
 }
 
 export default function UserDropdown({ avatarSrc = '/images/user-logo1.png' }: Props) {
-    const { pushLoginPage }: boolean = useAuthRedirect();
+    const { pushLoginPage, loggedIn } = useAuthRedirect();
     const [open, setOpen] = useState(false)
     const ref = useRef<HTMLDivElement | null>(null)
 
@@ -23,7 +23,7 @@ export default function UserDropdown({ avatarSrc = '/images/user-logo1.png' }: P
         return () => document.removeEventListener('click', onDoc)
     }, [])
 
-    if (pushLoginPage) {
+    if (loggedIn === false) {
         return (
             <div className="relative" ref={ref}>
                 <Image
@@ -37,7 +37,8 @@ export default function UserDropdown({ avatarSrc = '/images/user-logo1.png' }: P
 
                 {open && (
                     <div className="absolute flex flex-col items-center right-0 mt-2 bg-white rounded shadow-lg text-sm text-gray-800 z-50">
-                        <Link href="/login" className="py-6 w-30 hover:bg-gray-100 flex justify-center"><span>Logout</span></Link>
+                        <Link href="/login" className="py-6 w-30 hover:bg-gray-100 flex justify-center"><span>เข้าสู่ระบบ</span></Link>
+                        <Link href="/register" className="py-6 w-30 hover:bg-gray-100 flex justify-center"><span>สมัครสมาชิก</span></Link>
                     </div>
                 )}
             </div>
@@ -57,8 +58,7 @@ export default function UserDropdown({ avatarSrc = '/images/user-logo1.png' }: P
 
             {open && (
                 <div className="absolute flex flex-col items-center right-0 mt-2 bg-white rounded shadow-lg text-sm text-gray-800 z-50">
-                    <Link href="/login" className="py-6 w-30 hover:bg-gray-100 flex justify-center"><span>เข้าสู่ระบบ</span></Link>
-                    <Link href="/register" className="py-6 w-30 hover:bg-gray-100 flex justify-center"><span>สมัครสมาชิก</span></Link>
+                    <Link href="/login" className="py-6 w-30 hover:bg-gray-100 flex justify-center"><span>Logout</span></Link>
                 </div>
             )}
         </div>
