@@ -6,7 +6,7 @@ import { HeaderRight } from './HeaderRight'
 
 export function Header() {
     return (
-        <header className="fixed top-0 z-10 w-full bg-gradient-to-r from-purple-800 via-blue-600 to-blue-400 px-20 py-1 flex items-center justify-between sticky">
+        <header className="fixed top-0 z-50 w-full bg-gradient-to-r from-purple-800 via-blue-600 to-blue-400 px-20 py-1 flex items-center justify-between sticky overflow-visible">
 
             <div className="w-[200px] flex-shrink-0">
                 <Link href="/">
