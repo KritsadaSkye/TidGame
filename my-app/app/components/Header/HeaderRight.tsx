@@ -1,43 +1,17 @@
-
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useRouter } from "next/navigation";
 import Image from 'next/image'
+import { useAuthRedirect } from '../getMe/useAuthRedirect';
 
 
 export function HeaderRight() {
-    const [me, setMe] = useState<boolean | null>(null);
-    const route = useRouter();
-
-    const fetchUserId = async () => {
-        try {
-            const response = await axios.get('/api/me');
-            setMe(response.data.ok);
-        } catch (error) {
-            setMe(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchUserId();
-    }, []);
-
-    const handleLogin = (page: string) => {
-        if (!me) {
-            route.push('/login');
-            return;
-        }
-        route.push(page);
-    }
-
+    const { pushLoginPage } = useAuthRedirect();
 
     return (
         <>
             <div className="w-[200px] flex gap-[15px] justify-start items-center pl-[60px]">
 
-                <Image onClick={() => handleLogin("/login")} src="/images/user-logo.png" alt="User" className="cursor-pointer" width={32} height={32} />
+                <Image onClick={() => pushLoginPage("/login")} src="/images/user-logo.png" alt="User" className="cursor-pointer" width={32} height={32} />
 
-                <Image onClick={() => handleLogin("/checkout")} src="/images/cart-logo.png" alt="Cart" className="cursor-pointer" width={32} height={32} />
+                <Image onClick={() => pushLoginPage("/checkout")} src="/images/cart-logo.png" alt="Cart" className="cursor-pointer" width={32} height={32} />
 
                 <div className="relative">
                     <Image src="/images/notification-logo.png" alt="Notification" width={32} height={32} />

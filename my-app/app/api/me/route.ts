@@ -1,5 +1,3 @@
-import { fstat } from "fs";
-import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
 export async function GET() {

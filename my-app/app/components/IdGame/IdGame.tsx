@@ -1,7 +1,30 @@
+"use client";
+
+import axios from 'axios';
 import Image from 'next/image';
+import { useRouter } from "next/navigation";
 import { Item } from '@/app/types/idGame';
+import { useAuthRedirect } from '../getMe/useAuthRedirect';
 
 export function IdGame({ idGame }: { idGame: Item }) {
+    const { pushLoginPage, loggedIn } = useAuthRedirect();
+    const route = useRouter();
+
+    const addCart = async (idGame: Item) => {
+        console.log("Adding to cart:", idGame);
+        if (loggedIn === null) {
+            route.push('/login');
+        }
+        try {
+            const response = await axios.post('/api/Cart/cartItems', {
+                gameAccountId: idGame.id,
+            });
+            console.log('Add to cart response:', response.data);
+        } catch (error) {
+            console.error('Add to cart failed:', error);
+        }
+    }
+
     return (
         <section className="product-card rounded-2xl border border-gray-200 shadow-lg w-[410px] h-[477px] p-[15px]">
             <div className="product-card-inner flex flex-col">
@@ -37,10 +60,15 @@ export function IdGame({ idGame }: { idGame: Item }) {
                     </div>
 
                     <div className="add-to-cart mt-2">
-                        <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl font-medium rounded-full text-sm px-4 py-2.5 text-center leading-5 cursor-pointer">ใส่ตะกร้า</button>
+                        <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl font-medium rounded-full text-sm px-4 py-2.5 text-center leading-5 cursor-pointer" onClick={() => {
+                            pushLoginPage("");
+                            addCart(idGame);
+                        }}>
+                            ใส่ตะกร้า
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     );
 }
