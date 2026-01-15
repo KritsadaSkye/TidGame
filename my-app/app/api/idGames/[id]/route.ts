@@ -1,48 +1,50 @@
-import prisma from '@/lib/db';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/db";
 
+type RouteContext = {
+    params: { id: string };
+};
 
 export async function GET(
     request: NextRequest,
-    context: { params: Promise<{ id: string }> }
+    context: RouteContext
 ) {
+    const params = await Promise.resolve(context.params);
+    const id = params.id;
+
+    const productId = Number(id);
+    if (isNaN(productId)) {
+        return NextResponse.json(
+            { error: "Invalid product id" },
+            { status: 400 }
+        );
+    }
+
+    const idGames = await prisma.idGame.findMany({
+        where: { productId },
+    });
+
+    return NextResponse.json(idGames);
+}
+
+export async function DELETE(
+    request: NextRequest,
+    context: RouteContext) {
     try {
-        const { id } = await context.params;
+        const params = await Promise.resolve(context.params);
+        const id = params.id;
 
         const productId = Number(id);
-
         if (isNaN(productId)) {
             return NextResponse.json(
-                { error: "Invalid id" },
+                { error: "Invalid product id" },
                 { status: 400 }
             );
         }
-
-        const idGames = await prisma.idGame.findMany({
-            where: {
-                productId: productId,
-            },
+        const idGames = await prisma.idGame.delete({
+            where: { id: productId },
         });
-
         return NextResponse.json(idGames);
-    } catch (error) {
-        console.error("GET ERROR:", error);
-        return NextResponse.json(
-            { error: "GET failed" },
-            { status: 500 }
-        );
-    }
-}
-
-
-export async function DELETE(request: NextRequest,
-    { params }: { params: { id: string } }) {
-    const productId = Number(params.id);
-    try {
-        const deletedIdGames = await prisma.idGame.delete({
-            where: { id: productId }
-        });
-        return NextResponse.json(deletedIdGames);
     } catch (error) {
         return NextResponse.json({ error: "Failed to delete IdGames" }, { status: 500 });
     }
