@@ -1,28 +1,49 @@
 import prisma from '@/lib/db';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest, context: { params: { id: string } }) {
-    const { id } = await context.params;
+
+export async function GET(
+    request: NextRequest,
+    context: { params: Promise<{ id: string }> }
+) {
     try {
+        const { id } = await context.params;
+
         const productId = Number(id);
-        const getIdGame = await prisma.idGame.findMany({
-            where: { productId: productId },
+
+        if (isNaN(productId)) {
+            return NextResponse.json(
+                { error: "Invalid id" },
+                { status: 400 }
+            );
+        }
+
+        const idGames = await prisma.idGame.findMany({
+            where: {
+                productId: productId,
+            },
         });
-        return Response.json(getIdGame);
-    } catch (err) {
-        console.log("GET ERROR =", err);
-        return Response.json({ error: "GET failed" }, { status: 404 });
+
+        return NextResponse.json(idGames);
+    } catch (error) {
+        console.error("GET ERROR:", error);
+        return NextResponse.json(
+            { error: "GET failed" },
+            { status: 500 }
+        );
     }
 }
 
-export async function DELETE(request: NextRequest, context: { params: { id: string } }) {
-    const { id } = await context.params;
+
+export async function DELETE(request: NextRequest,
+    { params }: { params: { id: string } }) {
+    const productId = Number(params.id);
     try {
         const deletedIdGames = await prisma.idGame.delete({
-            where: { id: Number(id) }
+            where: { id: productId }
         });
-        return Response.json(deletedIdGames);
+        return NextResponse.json(deletedIdGames);
     } catch (error) {
-        return Response.json({ error: "Failed to delete IdGames" }, { status: 500 });
+        return NextResponse.json({ error: "Failed to delete IdGames" }, { status: 500 });
     }
 }

@@ -10,7 +10,7 @@ import { Item } from "@/app/types/idGame";
 
 
 export default function IdGamePage() {
-    const { id } = useParams();
+    const { id } = useParams<{ id: string }>();
 
     const [idGames, setIdGames] = useState([]);
 
