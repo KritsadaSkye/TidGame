@@ -1,8 +1,8 @@
 import prisma from '@/lib/db';
-import { NextRequest } from 'next/dist/server/web/spec-extension/request';
+import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest, context: { params: { id: string } }) {
-    const { id } = context.params;
+    const { id } = await context.params;
     try {
         const productId = Number(id);
         const getIdGame = await prisma.idGame.findMany({
@@ -16,7 +16,7 @@ export async function GET(request: NextRequest, context: { params: { id: string 
 }
 
 export async function DELETE(request: NextRequest, context: { params: { id: string } }) {
-    const { id } = context.params;
+    const { id } = await context.params;
     try {
         const deletedIdGames = await prisma.idGame.delete({
             where: { id: Number(id) }
