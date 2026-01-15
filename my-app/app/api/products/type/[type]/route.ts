@@ -1,21 +1,19 @@
 import prisma from '@/lib/db';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: Request,
-    { params }: { params: { type: string } }) {
-
+export async function GET(
+    request: NextRequest,
+    { params }: { params: Promise<{ type: string }> }
+) {
     const { type } = await params;
-
     try {
         console.log("TYPE =", type);
-
         const getProduct = await prisma.product.findMany({
             where: { type: type }
         });
-
-        return Response.json(getProduct);
-
+        return NextResponse.json(getProduct);
     } catch (err) {
         console.log("GET ERROR =", err);
-        return Response.json({ error: "GET failed" }, { status: 404 });
+        return NextResponse.json({ error: "GET failed" }, { status: 404 });
     }
 }

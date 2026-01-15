@@ -3,19 +3,17 @@ import prisma from "@/lib/db";
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     try {
-        const id = Number(params.id);
-
-        if (isNaN(id)) {
+        const idNum = Number(id);
+        if (isNaN(idNum)) {
             return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
         }
-
         const game = await prisma.idGame.findMany({
-            where: { productId: id },
+            where: { productId: idNum },
         });
-
         return NextResponse.json(game);
     } catch (error) {
         console.error(error);
@@ -28,15 +26,16 @@ export async function GET(
 
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }) {
+    { params }: { params: Promise<{ id: string }> }
+) {
+    const { id } = await params;
     try {
-        const id = Number(params.id);
-
-        if (isNaN(id)) {
+        const idNum = Number(id);
+        if (isNaN(idNum)) {
             return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
         }
         const idGames = await prisma.idGame.delete({
-            where: { id },
+            where: { id: idNum },
         });
         return NextResponse.json(idGames);
     } catch (error) {
