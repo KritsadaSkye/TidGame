@@ -1,6 +1,10 @@
 import prisma from '@/lib/db';
+import { NextRequest } from 'next/dist/server/web/spec-extension/request';
 
-export async function GET({ params }: { params: { id: string } }) {
+export async function GET(
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
 
     const { id } = await params;
 
@@ -20,7 +24,8 @@ export async function GET({ params }: { params: { id: string } }) {
     }
 }
 
-export async function DELETE({ params }: { params: { id: string } }
+export async function DELETE(request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
 ) {
     const { id } = await params;
 

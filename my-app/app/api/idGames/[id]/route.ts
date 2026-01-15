@@ -1,48 +1,42 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 
-type RouteContext = {
-    params: { id: string };
-};
-
 export async function GET(
     request: NextRequest,
-    context: RouteContext
+    { params }: { params: { id: string } }
 ) {
-    const params = await Promise.resolve(context.params);
-    const id = params.id;
+    try {
+        const id = Number(params.id);
 
-    const productId = Number(id);
-    if (isNaN(productId)) {
+        if (isNaN(id)) {
+            return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+        }
+
+        const game = await prisma.idGame.findMany({
+            where: { productId: id },
+        });
+
+        return NextResponse.json(game);
+    } catch (error) {
+        console.error(error);
         return NextResponse.json(
-            { error: "Invalid product id" },
-            { status: 400 }
+            { error: "Failed to fetch idGame" },
+            { status: 500 }
         );
     }
-
-    const idGames = await prisma.idGame.findMany({
-        where: { productId },
-    });
-
-    return NextResponse.json(idGames);
 }
 
 export async function DELETE(
     request: NextRequest,
-    context: RouteContext) {
+    { params }: { params: { id: string } }) {
     try {
-        const params = await Promise.resolve(context.params);
-        const id = params.id;
+        const id = Number(params.id);
 
-        const productId = Number(id);
-        if (isNaN(productId)) {
-            return NextResponse.json(
-                { error: "Invalid product id" },
-                { status: 400 }
-            );
+        if (isNaN(id)) {
+            return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
         }
         const idGames = await prisma.idGame.delete({
-            where: { id: productId },
+            where: { id },
         });
         return NextResponse.json(idGames);
     } catch (error) {
