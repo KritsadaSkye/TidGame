@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -11,6 +11,7 @@ export default function CheckoutPage() {
 
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+
 
     const fetchCartItems = async () => {
         try {
@@ -36,13 +37,13 @@ export default function CheckoutPage() {
                 <div className="main-container mt-[80px] flex justify-center">
                     <div className="cart-container border-none rounded-[10px] shadow-lg pb-[35px] w-[880px]">
                         <div className="cart-header ml-[30px]">
-                            <h1 className="text-3xl font-bold pb-[30px]">รายการสินค้า(2):</h1>
+                            <h1 className="text-3xl font-bold pb-[30px]">รายการสินค้า({cartItems.length}):</h1>
                         </div>
                         <div className="cart-flex flex gap-x-[55px] px-[50px] items-start">
                             <div className="cart-items flex flex-col gap-y-[20px]">
                                 {cartItems.map((item: CartItem) => {
                                     console.log(item);
-                                    return (<CartDetailItem key={item.gameAccount.id} item={item.gameAccount} />);
+                                    return (<CartDetailItem key={item.gameAccount.id} item={item.gameAccount} onDeleted={fetchCartItems} />);
                                 })}
                             </div>
                             <OrderSum cartItems={cartItems} totalPrice={totalPrice} />

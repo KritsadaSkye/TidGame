@@ -1,12 +1,27 @@
+import axios from 'axios';
 import Image from 'next/image'
 import { Item } from '@/app/types/idGame';
 
-export function CartDetailItem({ item }: { item: Item }) {
+export function CartDetailItem({ item, onDeleted }: { item: Item, onDeleted: () => void }) {
     console.log(item);
+    const deleteItem = async () => {
+        try {
+            const response = await axios.delete(`/api/Cart/cartItems`, {
+                data: { gameAccountId: item.id }
+            });
+            if (response.status === 200) {
+                console.log('Item deleted successfully');
+            }
+            onDeleted();
+        } catch (error) {
+            console.error('Error deleting item:', error);
+        }
+    }
+
     return (
         <>
             <div className="products-conatiner border-[1px] border-gray-300 rounded-[10px] pr-[10px] pb-[8px] w-[472px]">
-                <div className="cross-sign flex pt-[8px] pl-[10px] py-[5px] h-[22px] align-items-end cursor-pointer box-content cover">
+                <div className="cross-sign flex pt-[8px] pl-[10px] py-[5px] h-[22px] align-items-end cursor-pointer box-content cover" onClick={deleteItem}>
                     <Image src="/images/cross-logo.png" alt="CrossLogo" width={22} height={22} />
                 </div>
                 <div className="product-item flex items-center gap-x-[20px] pl-[35px] pr-[10px] pb-[25px]">

@@ -1,18 +1,22 @@
 "use client"
 
+import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useRef, useEffect } from 'react'
-import { useAuthRedirect } from '../getMe/useAuthRedirect';
+import { useAuth } from '../getMe/useAuth';
+import { useRouter } from 'next/navigation';
 
 type Props = {
     avatarSrc?: string
 }
 
 export default function UserDropdown({ avatarSrc = '/images/user-logo1.png' }: Props) {
-    const { pushLoginPage, loggedIn } = useAuthRedirect();
+    const { loggedIn } = useAuth();
     const [open, setOpen] = useState(false)
     const ref = useRef<HTMLDivElement | null>(null)
+
+    const router = useRouter();
 
     useEffect(() => {
         const onDoc = (e: MouseEvent) => {
@@ -21,7 +25,18 @@ export default function UserDropdown({ avatarSrc = '/images/user-logo1.png' }: P
         }
         document.addEventListener('click', onDoc)
         return () => document.removeEventListener('click', onDoc)
-    }, [])
+    }, [loggedIn])
+
+    const handleLogout = async () => {
+        try {
+            const response = await axios.post('/api/auth/logout');
+            if (response.status === 200) {
+                router.push('/login');
+            }
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    }
 
     if (loggedIn === false) {
         return (
@@ -58,7 +73,7 @@ export default function UserDropdown({ avatarSrc = '/images/user-logo1.png' }: P
 
             {open && (
                 <div className="absolute flex flex-col items-center right-0 mt-2 bg-white rounded shadow-lg text-sm text-gray-800 z-50">
-                    <Link href="/login" className="py-6 w-30 hover:bg-gray-100 flex justify-center"><span>Logout</span></Link>
+                    <div className="py-6 w-30 hover:bg-gray-100 flex justify-center cursor-pointer" onClick={handleLogout}><span>ออกระบบ</span></div>
                 </div>
             )}
         </div>

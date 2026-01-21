@@ -53,3 +53,25 @@ export async function POST(request: NextRequest) {
     }
 }
 
+export async function DELETE(request: NextRequest) {
+    try {
+        const { gameAccountId } = await request.json();
+        const userId = await getToken();
+        if (!userId) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
+        const deletedCartItem = await prisma.cartItem.deleteMany({
+            where: {
+                gameAccountId,
+            },
+        });
+
+        return NextResponse.json(deletedCartItem, { status: 200 });
+    } catch (error) {
+        return NextResponse.json(
+            { error: "Failed to delete cart item" },
+            { status: 500 }
+        );
+    }
+}

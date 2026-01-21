@@ -1,10 +1,8 @@
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from 'react';
 
-export function useAuthRedirect() {
+export function useAuth() {
     const [loggedIn, setLoggedIn] = useState<boolean | null>(null);
-    const route = useRouter();
 
     const fetchUserId = async () => {
         try {
@@ -19,14 +17,5 @@ export function useAuthRedirect() {
         fetchUserId();
     }, []);
 
-    const pushLoginPage = (page: string) => {
-        if (!loggedIn) {
-            route.push('/login');
-            return;
-        } else if (loggedIn) {
-            route.push(page);
-        }
-    }
-
-    return { pushLoginPage, loggedIn };
+    return { loggedIn };
 }
