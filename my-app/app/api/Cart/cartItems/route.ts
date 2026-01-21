@@ -29,9 +29,8 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-    const { gameAccountId } = await request.json();
-
     try {
+        const { gameAccountId } = await request.json();
         const userId = await getToken();
         if (!userId) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
