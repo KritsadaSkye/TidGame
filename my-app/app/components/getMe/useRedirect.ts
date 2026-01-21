@@ -1,13 +1,19 @@
+import { use, useEffect } from 'react';
 import { useAuth } from './useAuth';
 import { useRouter } from "next/navigation";
 
 export default function useRedirect() {
     const { loggedIn } = useAuth();
     const route = useRouter();
+    useEffect(() => {
+        if (loggedIn === null) {
+            route.push('/login');
+        }
+
+    }, [loggedIn, route]);
 
     const redirect = ({ path }: { path: string }) => {
-        if (loggedIn === null) return;
-        route.push(loggedIn ? path : '/login');
+        route.push(path);
     }
 
     return { redirect, loggedIn };
