@@ -3,9 +3,9 @@ import prisma from "@/lib/db";
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: { params: { id: string } }
 ) {
-    const { id } = await params;
+    const { id } = params;
     try {
         const idNum = Number(id);
         if (isNaN(idNum)) {
@@ -26,9 +26,9 @@ export async function GET(
 
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: { params: { id: string } }
 ) {
-    const { id } = await params;
+    const { id } = params;
     try {
         const idNum = Number(id);
         if (isNaN(idNum)) {
