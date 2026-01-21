@@ -6,7 +6,7 @@ export default function useRedirect() {
     const { loggedIn } = useAuth();
     const route = useRouter();
     useEffect(() => {
-        if (loggedIn === null) {
+        if (loggedIn === false) {
             route.push('/login');
         }
 
