@@ -1,13 +1,14 @@
 import prisma from "@/lib/db";
 import bcrypt from "bcrypt";
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     const { email, password } = await request.json();
     const user = await prisma.user.findUnique({
         where: { email }
     });
     if (user) {
-        return Response.json({ error: "User already exists" }, { status: 400 });
+        return NextResponse.json({ error: "User already exists" }, { status: 400 });
     }
 
     try {
@@ -24,13 +25,13 @@ export async function POST(request: Request) {
         }
         )
 
-        return Response.json({
+        return NextResponse.json({
             id: newUser.id,
             email: newUser.email,
             createdAt: newUser.createdAt
         });
     } catch (err) {
         console.log("REGISTER ERROR =", err);
-        return Response.json({ error: "Registration failed" }, { status: 500 });
+        return NextResponse.json({ error: "Registration failed" }, { status: 500 });
     }
 }   

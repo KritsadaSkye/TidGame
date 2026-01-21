@@ -1,12 +1,13 @@
 import prisma from '@/lib/db';
 import { getToken } from '../../auth/auth';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET() {
     try {
         const userId = await getToken();
 
         if (!userId) {
-            return Response.json({ error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
         const items = await prisma.cartItem.findMany({
@@ -18,22 +19,22 @@ export async function GET() {
 
         const totalPrice = items.reduce((sum, item) => sum + item.gameAccount.price, 0);
 
-        return Response.json({ items, totalPrice });
+        return NextResponse.json({ items, totalPrice });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { error: "Failed to fetch cart items" },
             { status: 500 }
         );
     }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     const { gameAccountId } = await request.json();
 
     try {
         const userId = await getToken();
         if (!userId) {
-            return Response.json({ error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
         const newCartItem = await prisma.cartItem.create({
@@ -43,10 +44,10 @@ export async function POST(request: Request) {
             }
         })
 
-        return Response.json(newCartItem, { status: 201 });
+        return NextResponse.json(newCartItem, { status: 201 });
 
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { error: "Failed to add cart item" },
             { status: 500 }
         );

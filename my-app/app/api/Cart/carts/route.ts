@@ -1,15 +1,16 @@
 import prisma from '@/lib/db';
 import { getToken } from '../../auth/auth';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
     try {
         const userId = await getToken();
         if (!userId) {
-            return Response.json({ error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
         console.log("USER ID =", userId);
-        return Response.json(await prisma.cart.findUnique({
+        return NextResponse.json(await prisma.cart.findUnique({
             where: { userId },
             include: {
                 items: {
@@ -20,7 +21,7 @@ export async function GET() {
             }
         }))
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { error: "Failed to fetch carts" },
             { status: 500 }
         );

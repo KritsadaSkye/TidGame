@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { NextResponse } from 'next/server';
 
 export async function GET() {
     try {
@@ -6,11 +7,11 @@ export async function GET() {
         const authToken: string = cookieStore.get('authToken')?.value || "";
 
         if (!authToken) {
-            return Response.json({ ok: false });
+            return NextResponse.json({ ok: false });
         }
 
-        return Response.json({ ok: true });
+        return NextResponse.json({ ok: true });
     } catch (error) {
-        return Response.json({ ok: false });
+        return NextResponse.json({ ok: false });
     }
 }
