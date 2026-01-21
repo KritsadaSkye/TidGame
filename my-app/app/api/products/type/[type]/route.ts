@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: Promise<{ type: string }> }
+    { params }: { params: { type: string } }
 ) {
-    const { type } = await params;
+    const { type } = params;
     try {
         console.log("TYPE =", type);
         const getProduct = await prisma.product.findMany({

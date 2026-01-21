@@ -15,7 +15,7 @@ export function Nav() {
                 ].map((item) => (
                     <li
                         key={item}
-                        className="bg-white text-black text-[12px] font-semibold px-[14px] py-[6px] border border-gray-300 rounded-full transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 hover:text-white cursor-pointer"
+                        className="bg-white text-black text-[12px] font-semibold px-[14px] py-[6px] border border-gray-300 rounded-full transition-all duration-300 hover:-translate-y-1 hover:scale-50 hover:bg-indigo-500 hover:text-white cursor-pointer"
                     >
                         {item}
                     </li>
