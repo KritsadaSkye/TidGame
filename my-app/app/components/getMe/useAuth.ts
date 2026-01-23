@@ -7,6 +7,7 @@ export function useAuth() {
     const fetchUserId = async () => {
         try {
             const response = await axios.get('/api/me');
+            console.log("response.data.ok", response.data.ok);
             setLoggedIn(response.data.ok);
         } catch (error) {
             setLoggedIn(false);

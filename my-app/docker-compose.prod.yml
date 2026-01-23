@@ -4,6 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: tidgame-next-app
+    env_file:
+      - .env.production
     ports:
       - "3000:3000"
     environment:
