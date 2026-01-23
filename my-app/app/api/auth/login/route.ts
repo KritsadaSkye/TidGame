@@ -33,9 +33,10 @@ export async function POST(request: NextRequest) {
             name: "authToken",
             value: token,
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
+            secure: true,
             sameSite: "lax",
             path: "/",
+            maxAge: 3600,
         });
 
         return NextResponse.json({ message: "login success" }, { status: 200 });
